@@ -1,9 +1,9 @@
 Class 2 Homework 📒
 
-Task 1
+Task 1:
 Write a program to create an interface Searchable with a method Search(string word) that searches for a given keyword in a text document. Create two classes Document and WebPage that implement the Searchable interface and provide their own implementations of the Search() method.
 
-Task 2
+Task 2:
 Write a program to create an interface Shape with the GetArea() method. Create three classes Rectangle, Circle, and Triangle that implement the Shape interface. Implement the GetArea() method for each of the three classes.
 
 Task 3:
