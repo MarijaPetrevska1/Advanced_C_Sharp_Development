@@ -3,11 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35818.85 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qinsshift.ExtensionMethods", "..\Qinshift.Class04\Qinsshift.ExtensionMethods\Qinsshift.ExtensionMethods.csproj", "{2BEDCE30-ED59-4A8A-8A0B-5B2A7FCB275A}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BEDCE30-ED59-4A8A-8A0B-5B2A7FCB275A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BEDCE30-ED59-4A8A-8A0B-5B2A7FCB275A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BEDCE30-ED59-4A8A-8A0B-5B2A7FCB275A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BEDCE30-ED59-4A8A-8A0B-5B2A7FCB275A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6084910D-D04A-4B42-B672-212B6C395168}
+		SolutionGuid = {42AB8896-BCCA-40EC-A34D-F4DD6D14DC7C}
 	EndGlobalSection
 EndGlobal
