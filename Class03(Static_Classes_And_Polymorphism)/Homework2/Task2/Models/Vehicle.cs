@@ -2,8 +2,8 @@
 
 namespace Task2.Models
 {
-    // Base class Vehicle
-    public class Vehicle
+    // Base class Vehicle - Abstract Class
+    public abstract class Vehicle
     {
         public virtual void DisplayInfo()
         {
