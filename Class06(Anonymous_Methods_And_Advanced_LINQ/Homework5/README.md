@@ -1,7 +1,8 @@
 ﻿# Class 6 Homework 📒
 
 
-Task 1
+## Task 1
+
 Filter all cars that have origin from Europe and print them in console.
 Filter all cars that have more that 6 Cylinders not including 6 after that Filter all cars that have exactly 4 Cylinders and have HorsePower more then 110.0. Join them in one result and print them in console.
 Count all cars based on their Origin and print the result in console. Example outpur "US 10 models\n Eu 15 Models";
