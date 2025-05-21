@@ -41,7 +41,7 @@ List<Dog> brownDogs_SQL = (from dog in Database.Dogs
                            orderby dog.Age
                            select dog).ToList();
 
-// Lambda
+// Lambda LINQ syntax
 List<Dog> brownDogs_Lambda = Database.Dogs
     .Where(d => d.Color == "Brown" && d.Age > 3)
     .OrderBy(d => d.Age)
