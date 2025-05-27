@@ -7,21 +7,14 @@ class Program
 {
     static void Main()
     {
-        // Homework 7 - Task3
-        // Read the file created in the previous task name "names.txt".
-        // Go thru the file content and filter out all the names that start with A.
-        // If there are any names create a new file named "namesStartingWith_A.txt"
-        // that will contains the filtered content and if there is no names that start with A do nothing.
-        // Do this for  the letters 'A', 'M', 'I', 'J', 'K', 'L', 'P', 'D', 'S' in the alphabet.
-
+        // Homework 7 - Task 4
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\n Task 3 - Homework 7\n");
+        Console.WriteLine("\n Task 4 - Homework 7\n");
         Console.ResetColor();
 
         string folderPath = @"..\..\..\Files";
         string sourceFile = Path.Combine(folderPath, "names.txt");
 
-        // Creating folder if missing
         if (!Directory.Exists(folderPath))
         {
             Directory.CreateDirectory(folderPath);
@@ -29,14 +22,7 @@ class Program
             Console.WriteLine("Folder 'Files' was created.");
             Console.ResetColor();
         }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Folder 'Files' already exists.");
-            Console.ResetColor();
-        }
 
-        // Checking if the file exists
         if (!File.Exists(sourceFile))
         {
             File.Create(sourceFile).Close();
@@ -44,17 +30,12 @@ class Program
             Console.WriteLine("File 'names.txt' was created.");
             Console.ResetColor();
         }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("File 'names.txt' already exists.");
-            Console.ResetColor();
-        }
 
-        // Reading existing names
-        List<string> allNames = File.ReadAllLines(sourceFile).Where(n => !string.IsNullOrWhiteSpace(n)).Select(n => n.Trim()).ToList();
+        List<string> allNames = File.ReadAllLines(sourceFile)
+            .Where(n => !string.IsNullOrWhiteSpace(n))
+            .Select(n => n.Trim())
+            .ToList();
 
-        // If there are no names in file, ask the user to add some names
         if (allNames.Count == 0)
         {
             Console.WriteLine("\nThe 'names.txt' file is empty. Please enter names to add (type 'done' to finish):");
@@ -94,14 +75,13 @@ class Program
             }
         }
 
-        // Letters to filter by
         char[] letters = { 'A', 'M', 'I', 'J', 'K', 'L', 'P', 'D', 'S' };
 
-        // Filter and create files
         foreach (char letter in letters)
         {
             var filteredNames = allNames
                 .Where(name => name.StartsWith(letter.ToString(), StringComparison.OrdinalIgnoreCase))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToList();
 
             if (filteredNames.Count > 0)
@@ -109,22 +89,54 @@ class Program
                 string newFileName = $"namesStartingWith_{letter}.txt";
                 string newFilePath = Path.Combine(folderPath, newFileName);
 
-                File.WriteAllLines(newFilePath, filteredNames);
+                HashSet<string> existingNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"File '{newFileName}' created with {filteredNames.Count} name(s).");
-                Console.ResetColor();
+                if (File.Exists(newFilePath))
+                {
+                    using (StreamReader sr = new StreamReader(newFilePath))
+                    {
+                        string line;
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            if (!string.IsNullOrWhiteSpace(line))
+                                existingNames.Add(line.Trim());
+                        }
+                    }
+                }
+
+                var namesToAdd = filteredNames.Where(n => !existingNames.Contains(n)).ToList();
+
+                if (namesToAdd.Count > 0)
+                {
+                    using (StreamWriter sw = new StreamWriter(newFilePath, append: true))
+                    {
+                        foreach (var name in namesToAdd)
+                        {
+                            sw.WriteLine(name);
+                        }
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"File '{newFileName}' updated with {namesToAdd.Count} new name(s).");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine($"File '{newFileName}' already contains all names. No new names added.");
+                    Console.ResetColor();
+                }
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine($"No names starting with '{letter}'. No file created.");
+                Console.WriteLine($"No names starting with '{letter}'. No file created or updated.");
                 Console.ResetColor();
             }
         }
 
         Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.WriteLine("\nDone filtering names for specified letters.");
+        Console.WriteLine("\nDone filtering and updating names for specified letters.");
         Console.ResetColor();
         Console.WriteLine("\nPress Enter to exit...");
         Console.ReadLine();
