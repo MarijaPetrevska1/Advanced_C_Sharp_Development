@@ -14,7 +14,7 @@ Console.ResetColor();
 
 string folderPath = @"..\..\..\Files";
 string filePath = Path.Combine(folderPath, "names.txt");
-
+// The folder
 if (!Directory.Exists(folderPath))
 {
     Directory.CreateDirectory(folderPath);
@@ -28,7 +28,7 @@ else
     Console.WriteLine("Folder 'Files' already exists.");
     Console.ResetColor();
 }
-
+// Checking if the file exists
 if (!File.Exists(filePath))
 {
     File.Create(filePath).Close(); 
@@ -42,7 +42,7 @@ else
     Console.WriteLine("File 'names.txt' already exists.");
     Console.ResetColor();
 }
-
+// Checking if there are already saved names in the file
 Console.WriteLine("\nHere are the names already saved in 'names.txt':");
 string[] existingNames = File.ReadAllLines(filePath);
 if (existingNames.Length > 0)
@@ -56,7 +56,7 @@ else
 {
     Console.WriteLine("(The file is currently empty)");
 }
-
+// Adding the names to the file 
 Console.WriteLine("\n Please enter names to add to the file (type 'done' to finish):");
 List<string> newNames = new List<string>();
 string input;
