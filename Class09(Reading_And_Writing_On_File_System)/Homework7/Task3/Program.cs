@@ -14,7 +14,7 @@ class Program
         // that will contains the filtered content and if there is no names that start with A do nothing.
         // Do this for  the letters 'A', 'M', 'I', 'J', 'K', 'L', 'P', 'D', 'S' in the alphabet.
 
-        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.ForegroundColor = ConsoleColor.Yellow; 
         Console.WriteLine("\n Task 3 - Homework 7\n");
         Console.ResetColor();
 
